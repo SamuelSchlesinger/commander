@@ -12,7 +12,7 @@ author:              Samuel Schlesinger
 maintainer:          sgschlesinger@gmail.com
 copyright:           2019 Samuel Schlesinger
 category:            Control
-extra-source-files:  CHANGELOG.md, README.md
+extra-source-files:  README.md
 tested-with:         GHC ==8.6.5 || ==8.8.4 || ==8.10.2
 
 source-repository head
