@@ -15,7 +15,7 @@ module Control.Monad.Commander (
   {- |
     The 'CommanderT' monad is stateful and has the ability to backtrack.
   -}
-  CommanderT(Action, Defeat, Victory), runCommanderT,
+  CommanderT(Action, Defeat, Victory), runCommanderT, hoistToFunctor, hoistFromFunctor,
 ) where
 
 import Control.Arrow (first)
