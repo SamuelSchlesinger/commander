@@ -4,7 +4,7 @@ name:                commandert
 version:             0.1.0.0
 synopsis:            A monad for commanders
 description:         A monad for commanders.
-homepage:            https://github.com/SamuelSchlesinger/commandert
+homepage:            https://github.com/SamuelSchlesinger/commander
 bug-reports:         https://github.com/SamuelSchlesinger/commander/issues
 license:             MIT
 license-file:        LICENSE
