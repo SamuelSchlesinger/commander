@@ -47,9 +47,7 @@ runCommanderT :: Monad m
               => CommanderT state m a 
               -> state 
               -> m (Maybe a)
-runCommanderT (Action action) state = do
-  (action', state') <- action state
-  runCommanderT action' state'
+runCommanderT (Action action) state = action state >>= uncurry runCommanderT
 runCommanderT Defeat _ = return Nothing
 runCommanderT (Victory a) _ = return (Just a)
 
