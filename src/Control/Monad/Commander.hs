@@ -60,6 +60,8 @@ runCommanderT (Victory a) _ = return (Just a)
 -- probably want to use this function.
 hoistToFunctor :: Functor g => (forall a. f a -> g a) -> CommanderT state f a -> CommanderT state g a
 hoistToFunctor phi (Action action) = Action (fmap (fmap (first (hoistToFunctor phi))) $ fmap phi action)
+hoistToFunctor _phi Defeat = Defeat
+hoistToFunctor _phi (Victory a) = Victory a
 
 -- | We can go from a 'Functor' to a non-'Functor' inside of a 'CommanderT'
 -- action. This does the transformation "bottom to top", as opposed to
@@ -68,6 +70,8 @@ hoistToFunctor phi (Action action) = Action (fmap (fmap (first (hoistToFunctor p
 -- probably want to use this function.
 hoistFromFunctor :: Functor f => (forall a. f a -> g a) -> CommanderT state f a -> CommanderT state g a
 hoistFromFunctor phi (Action action) = Action (fmap phi $ fmap (fmap (first (hoistFromFunctor phi))) action)
+hoistFromFunctor _phi Defeat = Defeat
+hoistFromFunctor _phi (Victory a) = Victory a
 
 instance Functor f => Applicative (CommanderT state f) where
   (<*>) = ap
