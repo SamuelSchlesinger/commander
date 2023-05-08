@@ -1,6 +1,8 @@
 {-# LANGUAGE RankNTypes #-}
 {-# LANGUAGE BlockArguments #-}
 {-# LANGUAGE DeriveFunctor #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
 {- |
 Module: Control.Monad.Commander
 Description: A monad for stateful, backtracking computations
@@ -22,6 +24,8 @@ import Control.Arrow (first)
 import Control.Monad (ap, MonadPlus)
 import Control.Monad.Trans (MonadTrans, lift, liftIO, MonadIO)
 import Control.Applicative (Alternative(empty, (<|>)))
+import Data.Function ((&))
+import Control.Monad.State.Class (MonadState(state))
 
 -- | A 'CommanderT' action is a metaphor for a military commander. At each
 -- step, we have a new 'Action' to take, or we could have experienced
@@ -97,3 +101,7 @@ instance Functor f => Alternative (CommanderT state f) where
   Defeat <|> a = a 
   v@(Victory _) <|> _ = v
   Action action <|> p = Action (fmap (\(a, s) -> (a <|> p, s)) . action)
+
+instance Monad m => MonadState s (CommanderT s m) where
+  state f = Action \s -> f s & \(x, s') -> pure (Victory x, s')
+
