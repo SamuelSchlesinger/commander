@@ -1,7 +1,7 @@
 cabal-version:       2.4
 
 name:                commandert
-version:             0.1.1.1
+version:             0.1.2.0
 synopsis:            A monad for commanders
 description:         A monad for commanders.
 homepage:            https://github.com/SamuelSchlesinger/commander
